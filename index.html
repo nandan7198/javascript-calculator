@@ -1,58 +1,211 @@
 <!DOCTYPE html>
 
 <html>
-<head>
-    <Title>Calculator</title>
-    <link rel="stylesheet" type="text/css" href="assets/calc_style.css"/>
+  <head>
+    <title>Calculator</title>
+    <!-- <link rel="stylesheet" type="text/css" href="assets/calc_style.css" /> -->
     <script language="JavaScript" src="code.js" type="text/javascript"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="assets/favicon.png"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-</head>
-<body>
-    <div id="calculator">
-        <h1>Calculator</h1>
-        <p id="last_operation_history"></p>
-        <p id="box" class="box">0</p>
-        <table id="table">
-            <tr>
-                <td><button onclick="calculate_percentage()">%</button></td>
-                <td><button onclick="clear_entry()">CE</button></td>
-                <td><button onclick="button_clear()">C</button></td>
-                <td><button id="backspace_btn" onclick="backspace_remove()"></button></td>
-            </tr>
-            <tr>
-                <td><button onclick="division_one()">¹∕ₓ</button></td>
-                <td><button onclick="power_of()">𝑥²</button></td>
-                <td><button onclick="square_root()">√𝑥</button></td>
-                <td><button id="plusOp" value="+" class="operator" onclick="button_number('+')">+</button></td>
-            </tr>
-            <tr>
-                <td><button onclick="button_number(7)">7</button></td>
-                <td><button onclick="button_number(8)">8</button></td>
-                <td><button onclick="button_number(9)">9</button></td>
-                <td><button id="subOp" value="-" class="operator" onclick="button_number('-')">-</button></td>
-            </tr>
-            <tr>
-                <td><button onclick="button_number(4)">4</button></td>
-                <td><button onclick="button_number(5)">5</button></td>
-                <td><button onclick="button_number(6)">6</button></td>
-                <td><button id="multiOp" value="*" class="operator" onclick="button_number('*')">×</button></td>
-            </tr>
-            <tr>
-                <td><button onclick="button_number(1)">1</button></td>
-                <td><button onclick="button_number(2)">2</button></td>
-                <td><button onclick="button_number(3)">3</button></td>            
-                <td><button id="divOp" value="/" class="operator" onclick="button_number('/')">÷</button></td>
-            </tr>
-            <tr>
-                <td><button onclick="plus_minus()">±</button></td>
-                <td><button onclick="button_number(0)">0</button></td>
-                <td><button id="dot" value="." onclick="button_number('.')">.</button></td>
-                <td colspan="4"><button value="=" class="operator" id="equal_sign" onclick="button_number('=')">=</button></td>
-            </tr>
-        </table>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  </head>
+  <body class="bg-gradient-to-br from-slate-700 to-slate-900">
+    <div class="flex flex-col h-screen justify-center items-center">
+      <div class="border-2 p-4 rounded-lg border-slate-500">
+        <h1 class="text-blue-50 text-center text-3xl font-bold">Calculator</h1>
+        <p
+          id="last_operation_history"
+          class="h-6 text-slate-400 text-right lg:text-lg md:text-md text-sm m-2"
+        ></p>
+        <p
+          id="box"
+          class="text-right text-white lg:text-3xl md:text-2xl text-xl border rounded-md border-orange-500 p-2"
+        >
+          0
+        </p>
+        <div class="text-slate-200 font-bold lg:text-3xl md:text-2xl text-xl">
+          <div class="mt-3 grid grid-cols-4 gap-2">
+            <button
+              class="bg-slate-600 hover:bg-slate-400 rounded-full lg:w-16 lg:h-16 w-14 h-14"
+              onclick="calculate_percentage()"
+            >
+              %
+            </button>
+            <button
+              class="bg-slate-600 hover:bg-slate-400 rounded-full lg:w-16 lg:h-16 w-14 h-14"
+              onclick="clear_entry()"
+            >
+              CE
+            </button>
+            <button
+              class="bg-slate-600 hover:bg-slate-400 rounded-full lg:w-16 lg:h-16 w-14 h-14"
+              onclick="button_clear()"
+            >
+              C
+            </button>
+            <button
+              class="bg-slate-600 hover:bg-slate-400 rounded-full lg:w-16 lg:h-16 w-14 h-14"
+              id="backspace_btn"
+              onclick="backspace_remove()"
+            >
+              <svg
+                class="lg:w-8 lg:h-8 w-6 h-6 ml-3"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M11.7071 15.2938C11.3166 14.9033 11.3166 14.2701 11.7071 13.8796L13.5839 12.0027L11.7079 10.1267C11.3174 9.73617 11.3174 9.103 11.7079 8.71248C12.0984 8.32195 12.7316 8.32195 13.1221 8.71248L14.9982 10.5885L16.8796 8.70702C17.2702 8.3165 17.9033 8.3165 18.2938 8.70702C18.6844 9.09755 18.6844 9.73071 18.2938 10.1212L16.4124 12.0027L18.293 13.8833C18.6835 14.2739 18.6835 14.907 18.293 15.2975C17.9025 15.6881 17.2693 15.6881 16.8788 15.2975L14.9982 13.4169L13.1213 15.2938C12.7308 15.6843 12.0976 15.6843 11.7071 15.2938Z"
+                  fill="#e2e8f0"
+                />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M5.6131 5.14653C6.18186 4.42266 7.05148 4 7.97206 4H20C21.6568 4 23 5.34315 23 7V17C23 18.6569 21.6568 20 20 20H7.97206C7.05148 20 6.18186 19.5773 5.6131 18.8535L1.68453 13.8535C0.829805 12.7656 0.829807 11.2344 1.68453 10.1465L5.6131 5.14653ZM7.97206 6C7.6652 6 7.37533 6.14089 7.18574 6.38218L3.25717 11.3822C2.97226 11.7448 2.97226 12.2552 3.25717 12.6178L7.18574 17.6178C7.37533 17.8591 7.6652 18 7.97206 18H20C20.5523 18 21 17.5523 21 17V7C21 6.44772 20.5523 6 20 6H7.97206Z"
+                  fill="#e2e8f0"
+                />
+              </svg>
+            </button>
+            <button
+              class="bg-slate-600 hover:bg-slate-400 rounded-full lg:w-16 lg:h-16 w-14 h-14"
+              onclick="division_one()"
+            >
+              ¹∕ₓ
+            </button>
+            <button
+              class="bg-slate-600 hover:bg-slate-400 rounded-full lg:w-16 lg:h-16 w-14 h-14"
+              onclick="power_of()"
+            >
+              𝑥²
+            </button>
+            <button
+              class="bg-slate-600 hover:bg-slate-400 rounded-full lg:w-16 lg:h-16 w-14 h-14"
+              onclick="square_root()"
+            >
+              √𝑥
+            </button>
+            <button
+              id="plusOp"
+              value="+"
+              class="bg-orange-500 hover:bg-orange-300 rounded-full lg:w-16 lg:h-16 w-14 h-14"
+              onclick="button_number('+')"
+            >
+              +
+            </button>
+            <button
+              class="bg-slate-600 hover:bg-slate-400 rounded-full lg:w-16 lg:h-16 w-14 h-14"
+              onclick="button_number(7)"
+            >
+              7
+            </button>
+            <button
+              class="bg-slate-600 hover:bg-slate-400 rounded-full lg:w-16 lg:h-16 w-14 h-14"
+              onclick="button_number(8)"
+            >
+              8
+            </button>
+            <button
+              class="bg-slate-600 hover:bg-slate-400 rounded-full lg:w-16 lg:h-16 w-14 h-14"
+              onclick="button_number(9)"
+            >
+              9
+            </button>
+            <button
+              id="subOp"
+              value="-"
+              class="bg-orange-500 hover:bg-orange-300 rounded-full lg:w-16 lg:h-16 w-14 h-14"
+              onclick="button_number('-')"
+            >
+              -
+            </button>
+            <button
+              class="bg-slate-600 hover:bg-slate-400 rounded-full lg:w-16 lg:h-16 w-14 h-14"
+              onclick="button_number(4)"
+            >
+              4
+            </button>
+            <button
+              class="bg-slate-600 hover:bg-slate-400 rounded-full lg:w-16 lg:h-16 w-14 h-14"
+              onclick="button_number(5)"
+            >
+              5
+            </button>
+            <button
+              class="bg-slate-600 hover:bg-slate-400 rounded-full lg:w-16 lg:h-16 w-14 h-14"
+              onclick="button_number(6)"
+            >
+              6
+            </button>
+            <button
+              id="multiOp"
+              value="*"
+              class="bg-orange-500 hover:bg-orange-300 rounded-full lg:w-16 lg:h-16 w-14 h-14"
+              onclick="button_number('*')"
+            >
+              ×
+            </button>
+            <button
+              class="bg-slate-600 hover:bg-slate-400 rounded-full lg:w-16 lg:h-16 w-14 h-14"
+              onclick="button_number(1)"
+            >
+              1
+            </button>
+            <button
+              class="bg-slate-600 hover:bg-slate-400 rounded-full lg:w-16 lg:h-16 w-14 h-14"
+              onclick="button_number(2)"
+            >
+              2
+            </button>
+            <button
+              class="bg-slate-600 hover:bg-slate-400 rounded-full lg:w-16 lg:h-16 w-14 h-14"
+              onclick="button_number(3)"
+            >
+              3
+            </button>
+            <button
+              id="divOp"
+              value="/"
+              class="bg-orange-500 hover:bg-orange-300 rounded-full lg:w-16 lg:h-16 w-14 h-14"
+              onclick="button_number('/')"
+            >
+              ÷
+            </button>
+            <button
+              class="bg-slate-600 hover:bg-slate-400 rounded-full lg:w-16 lg:h-16 w-14 h-14"
+              onclick="plus_minus()"
+            >
+              ±
+            </button>
+            <button
+              class="bg-slate-600 hover:bg-slate-400 rounded-full lg:w-16 lg:h-16 w-14 h-14"
+              onclick="button_number(0)"
+            >
+              0
+            </button>
+            <button
+              id="dot"
+              class="bg-slate-600 hover:bg-slate-400 rounded-full lg:w-16 lg:h-16 w-14 h-14"
+              value="."
+              onclick="button_number('.')"
+            >
+              .
+            </button>
+            <button
+              value="="
+              class="bg-orange-500 hover:bg-orange-300 rounded-lg lg:w-16 lg:h-16 w-14 h-14"
+              id="equal_sign"
+              onclick="button_number('=')"
+            >
+              =
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
-</body>
+  </body>
 </html>
